@@ -41,6 +41,8 @@
     }
 
     .ProgressBar {
+      display: flex;
+      justify-content: flex-end;
       border: 1px solid orangered;
       border-radius: 5px;
       height: 25px;
@@ -49,8 +51,11 @@
     }
 
     .ProgressBar > div {
+      --progressState: 20%;
+
       height: 100%;
       background-color: orangered;
+      width: calc(100% - var(--progressState));
 
     }
 
@@ -72,7 +77,7 @@
       <h1>Uczę się skrótów klawiszowych</h1>
       <h2 class="Clock">Pozostało 13:28</h2>
       <div class="ProgressBar">
-        <div style="width: 45%"></div>
+        <div></div>
       </div>
       <button disabled >Start</button>
       <button>Stop</button>
