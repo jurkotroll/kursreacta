@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Kurs Reacta - Tydzień 2</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <style>
     .App {
       font-family: sans-serif;
@@ -71,6 +73,7 @@
     <div class="Timebox">
       <h1>Uczę się skrótów klawiszowych</h1>
       <h2 class="Clock">Pozostało 13:28</h2>
+      <div id="root"></div>
       <div class="ProgressBar">
         <div style="width: 45%"></div>
       </div>
@@ -81,4 +84,20 @@
     </div>
   </div>
 </body>
+<script type="text/javascript">
+  const rootElement = document.getElementById("root");
+
+  const domElement = document.createElement("h2");
+  domElement.className = "Clock";
+  domElement.textContent = "Pozostało 10:20";
+
+  // rootElement.append(domElement);
+
+  const element = React.createElement(
+    "h2",
+    { className: "Clock", children: "Pozostało 15:25"}
+  );
+
+  ReactDOM.render(element, rootElement);
+</script>
 </html>
