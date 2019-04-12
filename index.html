@@ -10,6 +10,8 @@
   <style>
     .App {
       font-family: sans-serif;
+      display: flex;
+      flex-direction: row;
     }
 
     .TimeboxEditor {
@@ -63,7 +65,7 @@
   </style>
 </head>
 <body>
-  <h1>Kurs Reacta - Tydzień 2</h1>
+  <!-- <h1>Kurs Reacta - Tydzień 2</h1>
   <hr />
   <div class="App">
     <div class="TimeboxEditor inactive" >
@@ -83,7 +85,7 @@
       <button>Pause</button>
       Liczba przerw: 2
     </div>
-  </div>
+  </div> -->
 
   <div id="root"></div>
 </body>
@@ -173,7 +175,7 @@
 
 
   App.appendChild(TimeboxEditor);
-  App.appendChild(Timebox);
+  App.appendChild(Timebox); 
 
   rootElement.appendChild(HeaderText);
   rootElement.appendChild(SolidLine);
