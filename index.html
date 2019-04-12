@@ -53,6 +53,7 @@
     .ProgressBar > div {
       height: 100%;
       background-color: orangered;
+      width: 20%;
 
     }
 
@@ -73,7 +74,7 @@
     <div class="Timebox">
       <h1>Uczę się skrótów klawiszowych</h1>
       <h2 class="Clock">Pozostało 13:28</h2>
-      <div id="root"></div>
+      
       <div class="ProgressBar">
         <div style="width: 45%"></div>
       </div>
@@ -83,21 +84,108 @@
       Liczba przerw: 2
     </div>
   </div>
+
+  <div id="root"></div>
 </body>
 <script type="text/javascript">
+
+  const HeaderText = document.createElement("h1");
+  HeaderText.textContent = "Kurs Reacta - Tydzień 2";
+
+  const SolidLine = document.createElement("hr");
+
+  const App = document.createElement("div");
+  App.className = "App";
+ 
+  const TimeboxEditor = document.createElement("div");
+  TimeboxEditor.className = "TimeboxEditor inactive";
+
+  const GoalLabel = document.createElement("label");
+  GoalLabel.textContent = "Co robisz?";
+
+  const TimeToGoalLabel = document.createElement("label");
+  TimeToGoalLabel.textContent = "Ile minut";
+
+  const GoalInput = document.createElement("input");
+  GoalInput.disabled = true;
+  GoalInput.value = "Uczę się skrótów klawiszowych";
+  GoalInput.type = "text";
+
+  const TimeToGoalInput = document.createElement("input");
+  TimeToGoalInput.disabled = true;
+  TimeToGoalInput.value = "25";
+  TimeToGoalInput.type = "text";
+
+  const Break1 = document.createElement("br");
+  const Break2 = document.createElement("br");
+
+  const InitiateButton  = document.createElement("button");
+  InitiateButton.disabled = true;
+  InitiateButton.textContent = "Zacznij";
+  
+  const Timebox = document.createElement("div");
+  Timebox.className = "Timebox";
+  Timebox.textContent = "Liczba przerw: 2";
+
+  const GoalHeader = document.createElement("h1");
+  GoalHeader.textContent = "Uczę się skrótów klawiszowych";
+
+  const Clock = document.createElement("h2");
+  Clock.className = "Clock";
+  Clock.textContent = "Pozostało 10:20";
+
+  const ProgressBar = document.createElement("div");
+  ProgressBar.className = "ProgressBar";
+
+  const ProgressBarContent = document.createElement("div");
+
+  const StartButton  = document.createElement("button");
+  StartButton.disabled = true;
+  StartButton.textContent = "Start";
+
+  const StopButton  = document.createElement("button");
+  StopButton.textContent = "Stop";
+  // StopButton.disabled = false;
+
+  const PauseButton  = document.createElement("button");
+  PauseButton.textContent = "Pause";
+  // PauseButton.disabled = false;
   const rootElement = document.getElementById("root");
 
-  const domElement = document.createElement("h2");
-  domElement.className = "Clock";
-  domElement.textContent = "Pozostało 10:20";
+  GoalLabel.appendChild(GoalInput);
 
-  // rootElement.append(domElement);
+  TimeToGoalLabel.appendChild(TimeToGoalInput);
 
-  const element = React.createElement(
-    "h2",
-    { className: "Clock", children: "Pozostało 15:25"}
-  );
+  TimeboxEditor.appendChild(GoalLabel);
+  TimeboxEditor.appendChild(Break1);
+  TimeboxEditor.appendChild(TimeToGoalLabel);
+  TimeboxEditor.appendChild(Break2);
+  TimeboxEditor.appendChild(InitiateButton);
 
-  ReactDOM.render(element, rootElement);
+  ProgressBar.appendChild(ProgressBarContent);
+
+  Timebox.appendChild(GoalHeader);
+  Timebox.appendChild(Clock);
+  Timebox.appendChild(ProgressBar);
+  Timebox.appendChild(StartButton);
+  Timebox.appendChild(StopButton);
+  Timebox.appendChild(PauseButton);
+
+
+  App.appendChild(TimeboxEditor);
+  App.appendChild(Timebox);
+
+  rootElement.appendChild(HeaderText);
+  rootElement.appendChild(SolidLine);
+  rootElement.appendChild(App);
+  console.log('rootElement: ', rootElement);
+ 
+  // const element = React.createElement(
+  //   "h2",
+  //   { className: "Clock", children: "Pozostało 15:25"}
+  // );
+
+  
+  // ReactDOM.render(element, rootElement);
 </script>
 </html>
