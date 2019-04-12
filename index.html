@@ -89,7 +89,14 @@
     <div class="Timebox">
       <h1>Uczę się skrótów klawiszowych</h1>
       <h2 class="Clock">Pozostało 13:28</h2>
-      <div class="ProgressBar singleProgressBar">
+      <div class="ProgressBar" style="--progressState: 10%;
+      
+      padding-left: calc(var(--progressState));
+
+      background-color: orangered;
+      background-clip: content-box;
+      
+      width: calc(100% - var(--progressState));">
         
       </div>
       <button disabled >Start</button>
