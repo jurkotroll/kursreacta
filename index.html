@@ -8,10 +8,16 @@
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <style>
-    .App {
+    .MainComponent {
       font-family: sans-serif;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+    }
+
+    .App {
+      font-family: sans-serif;
+      /* display: flex;
+      flex-direction: column; */
     }
 
     .TimeboxEditor {
@@ -22,6 +28,9 @@
       margin-bottom: 20px;
     }
 
+    /* hr {
+      width: 100%;
+    } */
     input {
       min-width: 60%;
       margin-left: 20px;
@@ -65,40 +74,145 @@
   </style>
 </head>
 <body>
-  <!-- <h1>Kurs Reacta - Tydzień 2</h1>
-  <hr />
-  <div class="App">
-    <div class="TimeboxEditor inactive" >
-      <label>Co robisz? <input disabled value="Uczę się skrótów klawiszowych" type="text"></label><br/>
-      <label>Ile minut  <input disabled value="25" type="text"></label><br/>
-      <button disabled >Zacznij</button>
-    </div>
-    <div class="Timebox">
-      <h1>Uczę się skrótów klawiszowych</h1>
-      <h2 class="Clock">Pozostało 13:28</h2>
-      
-      <div class="ProgressBar">
-        <div style="width: 45%"></div>
-      </div>
-      <button disabled >Start</button>
-      <button>Stop</button>
-      <button>Pause</button>
-      Liczba przerw: 2
-    </div>
-  </div> -->
-
-  <div id="root"></div>
+  <div id="root1"></div>
+  <div id="root2"></div>
 </body>
 <script type="text/javascript">
+
+  const rootElement1 = document.getElementById("root1");
+  const rootElement2 = document.getElementById("root2");
+
+  const HeaderTextComponent = React.createElement(
+    "h1",
+    { children: "Kurs Reacta - Tydzień 2" }
+  );
+
+  const SolidLineComponent = React.createElement(
+    "hr",
+    {}
+  );
+
+  const GoalInputComponent = React.createElement(
+    "input",
+    { type: "text",
+      value: "Uczę się skrótów klawiszowych",
+      disabled: true}
+  );
+
+  const GoalLabelComponent = React.createElement(
+    "label",
+    {children: ["Co robisz?", GoalInputComponent]}
+  );
+
+  const TimeToGoalInputComponent = React.createElement(
+    "input",
+    { type: "text",
+      value: "25",
+      disabled: true}
+  );
+
+  const TimeToGoalLabelComponent = React.createElement(
+    "label",
+    {children: ["Ile minut", TimeToGoalInputComponent]}
+  );
+
+  const BreakComponent = React.createElement(
+    "br"
+  );
+
+  const InitiateButtonComponent = React.createElement(
+    "button",
+    { disabled: true,
+      children: "Zacznij"}
+  );
+
+  const TimeboxEditorComponent = React.createElement(
+    "div",
+    { className: "TimeboxEditor inactive",
+      children: [GoalLabelComponent, BreakComponent, TimeToGoalLabelComponent, BreakComponent, InitiateButtonComponent]}
+  );
+
+  const GoalHeaderComponent = React.createElement(
+    "h1",
+    { children: "Uczę się skrótów klawiszowych" }
+  );
+
+  const ClockComponent = React.createElement(
+    "h2",
+    { className: "Clock",
+      children: "Pozostało 10:20" }
+  );
+
+  const ProgressBarContentComponent = React.createElement(
+    "div"
+  );
+
+  const ProgressBarComponent = React.createElement(
+    "div",
+    { className: "ProgressBar",
+      children: [ProgressBarContentComponent]}
+  );
+
+  const StartButtonComponent = React.createElement(
+    "button",
+    { disabled: true,
+      children: "Start"}
+  );
+
+  const StopButtonComponent = React.createElement(
+    "button",
+    { disabled: true,
+      children: "Stop"}
+  );
+
+  const PauseButtonComponent = React.createElement(
+    "button",
+    { disabled: true,
+      children: "Pausa"}
+  );
+
+  const TimeboxComponent = React.createElement(
+    "div",
+    { className: "Timebox",
+      children: [ GoalHeaderComponent,
+                  ClockComponent, 
+                  ProgressBarComponent, 
+                  StartButtonComponent, 
+                  StopButtonComponent, 
+                  PauseButtonComponent, 
+                  "Liczba przerw: 2"]}
+  );
+
+  const MainComponent = React.createElement(
+    "div",
+    { className: "MainComponent incactive",
+      children: [TimeboxEditorComponent, TimeboxComponent]}
+  );
+
+  const App = React.createElement(
+    "div",
+    { className: "App",
+      children: [HeaderTextComponent, SolidLineComponent, MainComponent] }
+  );
+  
+  ReactDOM.render(App, rootElement2); 
+
+
+
+  // ReactDOM.render(HeaderTextComponent, rootElement2);
+
+
+
+
+
+
+
 
   const HeaderText = document.createElement("h1");
   HeaderText.textContent = "Kurs Reacta - Tydzień 2";
 
   const SolidLine = document.createElement("hr");
 
-  const App = document.createElement("div");
-  App.className = "App";
- 
   const TimeboxEditor = document.createElement("div");
   TimeboxEditor.className = "TimeboxEditor inactive";
 
@@ -152,7 +266,9 @@
   const PauseButton  = document.createElement("button");
   PauseButton.textContent = "Pause";
   // PauseButton.disabled = false;
-  const rootElement = document.getElementById("root");
+  
+  const MainDiv = document.createElement("div");
+  MainDiv.className = "MainComponent";
 
   GoalLabel.appendChild(GoalInput);
 
@@ -174,20 +290,31 @@
   Timebox.appendChild(PauseButton);
 
 
-  App.appendChild(TimeboxEditor);
-  App.appendChild(Timebox); 
+  MainDiv.appendChild(TimeboxEditor);
+  MainDiv.appendChild(Timebox); 
 
-  rootElement.appendChild(HeaderText);
-  rootElement.appendChild(SolidLine);
-  rootElement.appendChild(App);
-  console.log('rootElement: ', rootElement);
+  // const App = document.createElement("div");
+
+
+  // App.appendChild(HeaderText);
+  // App.appendChild(SolidLine);
+  // App.appendChild(MainDiv);
+ 
+  rootElement1.appendChild(HeaderText);
+  rootElement1.appendChild(SolidLine);
+  rootElement1.appendChild(MainDiv);
  
   // const element = React.createElement(
   //   "h2",
   //   { className: "Clock", children: "Pozostało 15:25"}
   // );
+  // ReactDOM.render(App, rootElement2);
 
-  
-  // ReactDOM.render(element, rootElement);
+
+
+
+
+
+
 </script>
 </html>
