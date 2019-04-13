@@ -7,6 +7,7 @@
   <title>Kurs Reacta - Tydzień 2</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     .App {
       font-family: sans-serif;
@@ -72,7 +73,7 @@
     </div>
     <div class="Timebox">
       <h1>Uczę się skrótów klawiszowych</h1>
-      <h2 class="Clock">Pozostało 13:28</h2>
+      <!-- <h2 class="Clock">Pozostało 13:28</h2> -->
       <div id="root"></div>
       <div class="ProgressBar">
         <div style="width: 45%"></div>
@@ -84,20 +85,19 @@
     </div>
   </div>
 </body>
-<script type="text/javascript">
+<script type="text/babel">
+
+  function Clock ({minutes = 20, seconds = 48 }) {
+    return (
+      <h2 className = "Clock">Pozostało {minutes}:{seconds}</h2>
+    );
+  };
+
   const rootElement = document.getElementById("root");
 
-  const domElement = document.createElement("h2");
-  domElement.className = "Clock";
-  domElement.textContent = "Pozostało 10:20";
-
-  // rootElement.append(domElement);
-
-  const element = React.createElement(
-    "h2",
-    { className: "Clock", children: "Pozostało 15:25"}
-  );
+  const element = (<Clock minutes = "17" seconds = "28" />);
 
   ReactDOM.render(element, rootElement);
+
 </script>
 </html>
