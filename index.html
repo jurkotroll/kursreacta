@@ -87,7 +87,16 @@
 </body>
 <script type="text/babel">
 
-  function checkOutFormat60 (hourNum) {
+  function checkOutFormat60 (timeNum) {
+    let timeString = timeNum.toString();
+    if (timeString.length < 2) {
+      return(
+        timeString = "0" + timeString
+      )
+    }
+  };
+
+  function checkOutFormat24 (hourNum) {
     let hourString = hourNum.toString();
     if (hourString.length < 2) {
       return(
@@ -98,17 +107,18 @@
 
 
 
-  function Clock ({minutes = 20, seconds = 48 }) {
+  function Clock ({hour = '00', minutes = '00', seconds = '00' }) {
+    hour = checkOutFormat24(hour);
     minutes = checkOutFormat60(minutes);
     seconds = checkOutFormat60(seconds);
     return (
-      <h2 className = "Clock">Pozostało {minutes}:{seconds}</h2>
+      <h2 className = "Clock">Pozostało {hour}:{minutes}:{seconds}</h2>
     );
   };
 
   const rootElement = document.getElementById("root");
 
-  const element = (<Clock minutes = {7} seconds = {0} />);
+  const element = (<Clock hour = {3} minutes = {7} seconds = {0} />);
 
   ReactDOM.render(element, rootElement);
 
