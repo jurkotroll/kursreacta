@@ -44,6 +44,7 @@
     }
 
     .ProgressBar {
+      display: flex;
       border: 1px solid orangered;
       border-radius: 5px;
       height: 25px;
@@ -90,16 +91,19 @@
     );
   };
 
-  function ProgressBar ({ percent = 33 }) {
+  function ProgressBar ({ percent = 33, trackRemaining = false}) {
+    
     return (
-      <div className="ProgressBar">
+      <div  className="ProgressBar" 
+            style={{justifyContent: `${trackRemaining ? "flex-end" : "flex-start"}` }}>
+            
         <div style={{width: `${percent}%`}}></div>
       </div>
     )
   }
 
 
-  ReactDOM.render(<div><Clock /> <ProgressBar /> </div>, document.getElementById("root"));
+  ReactDOM.render(<div><Clock /> <ProgressBar trackRemaining = {true}/> </div>, document.getElementById("root"));
 
 
 </script>
