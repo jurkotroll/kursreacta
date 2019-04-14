@@ -88,25 +88,36 @@
 <script type="text/babel">
 
   function checkOutFormat60 (num) {
-    let str = num.toString();
-    if (str.length < 2) {
-      return(
-        str = "0" + str
-      )
-    }
+    if (num < 0) {
+      num = 0
+    } else if (num > 59) {
+      num = 59
+    };
+    let str = "0" + num.toString();
+    return(
+      str.slice(str.length - 2, str.length)
+    )
   };
 
   function checkOutFormat24 (num) {
-    let str = num.toString();
-    if (str.length < 2) {
-      return(
-        str = "0" + str
-      )
-    }
+    if (num < 0) {
+      num = 0
+    } else if (num > 23) {
+      num = 23
+    };
+    let str = "0" + num.toString();
+    return(
+      str.slice(str.length - 2, str.length)
+    )
   };
 
   function checkOutFormat000 (num) {
-    let str = "000" + num.toString();
+    if (num < 0) {
+      num = 0
+    } else if (num > 999) {
+      num = 999
+    };
+    let str = "00" + num.toString();
     // let lengthStr = str.length;
     return(
       str.slice(str.length - 3, str.length)
@@ -128,7 +139,7 @@
 
   const rootElement = document.getElementById("root");
 
-  const element = (<Clock hours = {3} minutes = {7} seconds = {0} milliseconds={23} />);
+  const element = (<Clock hours = {9} minutes = {78} seconds = {89} milliseconds={23} />);
 
   ReactDOM.render(element, rootElement);
 
