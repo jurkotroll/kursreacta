@@ -87,38 +87,48 @@
 </body>
 <script type="text/babel">
 
-  function checkOutFormat60 (timeNum) {
-    let timeString = timeNum.toString();
-    if (timeString.length < 2) {
+  function checkOutFormat60 (num) {
+    let str = num.toString();
+    if (str.length < 2) {
       return(
-        timeString = "0" + timeString
+        str = "0" + str
       )
     }
   };
 
-  function checkOutFormat24 (hourNum) {
-    let hourString = hourNum.toString();
-    if (hourString.length < 2) {
+  function checkOutFormat24 (num) {
+    let str = num.toString();
+    if (str.length < 2) {
       return(
-        hourString = "0" + hourString
+        str = "0" + str
       )
     }
   };
 
+  function checkOutFormat000 (num) {
+    let str = "000" + num.toString();
+    // let lengthStr = str.length;
+    return(
+      str.slice(str.length - 3, str.length)
+    )
+  };
 
-
-  function Clock ({hour = '00', minutes = '00', seconds = '00' }) {
-    hour = checkOutFormat24(hour);
+  function Clock ({hours = '00', minutes = '00', seconds = '00', milliseconds = '000' }) {
+    console.log('milliseconds: ', milliseconds);
+    hours = checkOutFormat24(hours);
     minutes = checkOutFormat60(minutes);
     seconds = checkOutFormat60(seconds);
+    milliseconds = checkOutFormat000(milliseconds);
+    console.log('milliseconds: ', milliseconds);
+
     return (
-      <h2 className = "Clock">Pozostało {hour}:{minutes}:{seconds}</h2>
+      <h2 className = "Clock">Pozostało {hours}:{minutes}:{seconds}.{milliseconds}</h2>
     );
   };
 
   const rootElement = document.getElementById("root");
 
-  const element = (<Clock hour = {3} minutes = {7} seconds = {0} />);
+  const element = (<Clock hours = {3} minutes = {7} seconds = {0} milliseconds={23} />);
 
   ReactDOM.render(element, rootElement);
 
