@@ -100,7 +100,8 @@
           isRunning: false,
           isPaused: false,
           pausesCount: 0,
-          elapsedTimeInSeconds: 0
+          elapsedTimeInSeconds: 0,
+          totalTimeInSeconds: this.props.totalTimeInSeconds
         }
         this.handleStart = this.handleStart.bind(this);
         this.handleStop = this.handleStop.bind(this);
@@ -157,7 +158,7 @@
 
     render() {
       const { isPaused, isRunning, pausesCount, elapsedTimeInSeconds } = this.state;
-      const totalTimeInSeconds = 15;
+      const totalTimeInSeconds = this.state.totalTimeInSeconds;
       const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
       const minutesLeft = Math.floor(timeLeftInSeconds/60);
       const secondsLeft = Math.floor(timeLeftInSeconds%60);
@@ -182,7 +183,7 @@
     return(
       <div className="App">
         <TimeboxEditor />
-        <Timebox />
+        <Timebox totalTimeInSeconds={17}/>
       </div>
     )
   }
