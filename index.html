@@ -101,11 +101,15 @@
           isPaused: false,
           pausesCount: 0,
           elapsedTimeInSeconds: 0,
-          totalTimeInSeconds: this.props.totalTimeInSeconds
+          timeLeftInSeconds: this.props.totalTimeInSeconds,
+          totalTimeInSeconds: this.props.totalTimeInSeconds,
+          intervalValue: 1
         }
         this.handleStart = this.handleStart.bind(this);
-        this.handleStop = this.handleStop.bind(this);
+        this.handleStopButton = this.handleStopButton.bind(this);
         this.togglePause = this.togglePause.bind(this);
+
+        // const intervalValue = 0.1;
     };
 
     stopTimer() {
@@ -116,18 +120,22 @@
     startTimer() {
       this.intervalId = window.setInterval(() => {
         this.setState(
-          (prevState) => ({ elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1})
+          (prevState) => ({
+             elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + this.state.intervalValue,
+             timeLeftInSeconds: Math.floor((prevState.totalTimeInSeconds - prevState.elapsedTimeInSeconds)%60)
+          })
         )
-      }, 100);
+      }, 1000);
       console.log('this.intervalId befor: ', this.intervalId);
     };
 
-    handleStop(event){
+    handleStopButton(event){
       this.setState({
         isRunning: false,
         isPaused: false,
         pausesCount: 0,
-        elapsedTimeInSeconds: 0
+        elapsedTimeInSeconds: 0,
+        timeLeftInSeconds: this.state.totalTimeInSeconds
       })
       this.stopTimer();
     };
@@ -150,10 +158,20 @@
           }
           return {
             isPaused,
-            pausesCount: isPaused ? prevState.pausesCount + 1 : prevState.pausesCount
+            pausesCount: isPaused ? prevState.pausesCount + 1 : prevState.pausesCount,
           }
         }
       )
+    }
+
+    handleEndOfTime() {
+      this.stopTimer()
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+      if (nextState.timeLeftInSeconds <= this.state.intervalValue) {
+        this.stopTimer();
+      }
     }
 
     render() {
@@ -169,7 +187,7 @@
           <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
           <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/> 
           <button onClick={this.handleStart} disabled={isRunning} >Start</button>
-          <button onClick={this.handleStop} disabled={!isRunning}>Stop</button>
+          <button onClick={this.handleStopButton} disabled={!isRunning}>Stop</button>
           <button onClick={this.togglePause} disabled={!isRunning}>{isPaused ? "Wznów" : "Pause"}</button>
           Liczba przerw: {pausesCount}
         </div>
@@ -183,7 +201,7 @@
     return(
       <div className="App">
         <TimeboxEditor />
-        <Timebox totalTimeInSeconds={17}/>
+        <Timebox totalTimeInSeconds={5}/>
       </div>
     )
   }
