@@ -69,6 +69,46 @@
 </body>
 <script type="text/babel">
 
+
+  function checkOutFormat60 (num) {
+    if (num < 0) {
+      num = 0
+    } else if (num > 59) {
+      num = 59
+    };
+    let str = "0" + num.toString();
+    return(
+      str.slice(str.length - 2, str.length)
+    )
+  };
+
+  function checkOutFormat24 (num) {
+    if (num < 0) {
+      num = 0
+    } else if (num > 23) {
+      num = 23
+    };
+    let str = "0" + num.toString();
+    return(
+      str.slice(str.length - 2, str.length)
+    )
+  };
+
+  function checkOutFormat000 (num) {
+    if (num < 0) {
+      num = 0
+    } else if (num > 999) {
+      num = 999
+    };
+    let str = "00" + num.toString();
+    // let lengthStr = str.length;
+    return(
+      str.slice(str.length - 3, str.length)
+    )
+  };
+
+
+
   function TimeboxEditor() {
     return(
       <div className="TimeboxEditor inactive" >
@@ -80,8 +120,11 @@
   }
 
   function Clock ({ className="", minutes = 20, seconds = 48 }) {
+    minutes = checkOutFormat60(minutes);
+    seconds = checkOutFormat60(seconds);
     return (
       <h2 className = {"Clock " + className}>Pozostało {minutes}:{seconds}</h2>
+
     );
   };
 
@@ -208,7 +251,11 @@
 
 
 
+
+
+
   ReactDOM.render(<App />, document.getElementById("root"));
+
 
 
 </script>
