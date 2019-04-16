@@ -116,9 +116,19 @@
     startTimer() {
       this.intervalId = window.setInterval(() => {
         this.setState(
-          (prevState) => ({ elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1})
+          (prevState) => {
+            if (true) {
+              console.log('true: ', true);
+
+              return { elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.01}
+            } else {
+              console.log('true: ', true);
+
+              return { elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.01}
+            }
+          }
         )
-      }, 100);
+      }, 10);
       console.log('this.intervalId befor: ', this.intervalId);
     };
 
