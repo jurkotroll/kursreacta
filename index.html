@@ -13,7 +13,15 @@
       font-family: sans-serif;
     }
 
-    .TimeboxEditor {
+    .Timebox {
+
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    .TimeboxEditor, .TimeboxCreator {
       text-align: right;
       border: 1px solid gray;
       border-radius: 5px;
@@ -32,7 +40,7 @@
       margin-left: 10px;
     }
 
-    .Timebox {
+    .CurrentTimebox {
       border: 1px solid gray;
       border-radius: 5px;
       padding: 20px;
@@ -112,7 +120,7 @@
     )
   }
 
-  class Timebox extends React.Component {
+  class CurrentTimebox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -127,7 +135,7 @@
     };
 
     stopTimer() {
-      console.log('this.intervalId after: ', this.intervalId);
+      
       window.clearInterval(this.intervalId);
       
     };
@@ -137,7 +145,7 @@
           (prevState) => ({ elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1})
         )
       }, 100);
-      console.log('this.intervalId befor: ', this.intervalId);
+      
     };
 
     handleStop(event){
@@ -152,7 +160,7 @@
     handleStart(event){
       this.setState({
         isRunning: true,
-        // elapsedTimeInSeconds: 0
+       
       })
       this.startTimer();
     };
@@ -184,7 +192,7 @@
       const secondsLeft = Math.floor(timeLeftInSeconds%60);
       const progressInPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
       return(
-        <div className={`Timebox ${isEditable ? "inactive" : ""}`}>
+        <div className={`CurrentTimebox ${isEditable ? "inactive" : ""}`}>
           <h1>{title}</h1>
           <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
           <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/> 
@@ -233,7 +241,7 @@
             onTitleChange={this.handleTitleChange} 
             onTotalTimeInMinutesChange={this.handleTotalTimeInMinChange}
             onConfirm={this.handleConfirm}  />
-          <Timebox 
+          <CurrentTimebox 
             title={title} 
             isEditable={isEditable}
             onEdit={this.handleEdit}
@@ -244,10 +252,56 @@
     }
   }
 
+  function TimeboxCreator(props) {
+    return(
+      <div className={`TimeboxCreator`} >
+        <label>Co robisz?
+          <input  type="text" />
+        </label><br/>
+        <label>Ile minut  
+          <input  type="number" />
+        </label><br/>
+        <button >Dodaj timebox</button>
+      </div>
+    )
+  }
+ 
+  class TimeoxList extends React.Component {
+    state = {
+      timeboxes: [
+        {title: "costam 1", totalTimeInMinutes: "25"},
+        {title: "costam 2", totalTimeInMinutes: "21"},
+        {title: "costam 3", totalTimeInMinutes: "28"},
+        {title: "costam 4", totalTimeInMinutes: "20"}
+      ]
+    }
+    render() {
+      return(
+        <React.Fragment>
+          <TimeboxCreator />
+          {this.state.timeboxes.map(({ title, totalTimeInMinutes }, index) => 
+            <Timebox key={index} title={ title } totalTimeInMinutes={ totalTimeInMinutes } />
+          )}
+        </React.Fragment>
+      )
+    }
+  }
+
+  function Timebox({ title, totalTimeInMinutes }) {
+    return(
+      <div className={`Timebox`}>
+        <h3>{title} - {totalTimeInMinutes} min.</h3>
+      </div>
+    )
+  }
+
   function App () {
     return(
       <div className="App">
-        <EditableTimebox />
+        <TimeoxList />
+      {
+        // <EditableTimebox />
+      }
       </div>
     )
   }
