@@ -30,6 +30,20 @@
       margin-bottom: 20px;
     }
 
+    .TimeboxCreator {
+      background-color:aqua;
+    }
+    .TimeboxEditor {
+      background-color: aquamarine;
+    }
+    .Timebox {
+      background-color: #ffaaaa;
+    }
+    .CurrentTimebox {
+      background-color: #ffffaa;
+    }
+
+
     input {
       min-width: 60%;
       margin-left: 20px;
@@ -367,9 +381,9 @@
     return(
       <div className="App">
         <TimeboxList />
-      {
-        // <EditableTimebox />
-      }
+      
+        <EditableTimebox />
+      
       </div>
     )
   }
