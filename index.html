@@ -254,41 +254,43 @@
   }
 
   class TimeboxCreator extends React.Component {
-    state = {
-      title: "",
-      totalTimeInMinutes: ""
-    }
-
-    handleTitleChange = (event) => {
-      this.setState({ title: event.target.value });
-    }
-
-    handleTotalTimeInMinChange = (event) => {
-      this.setState({ totalTimeInMinutes: event.target.value });
+    constructor(props) {
+      super(props);
+      this.titleInput = React.createRef();
+      this.totalTimeInMinutesInput = React.createRef();
     }
 
     handleSubmit = (event) => {
       event.preventDefault();
       this.props.onCreate({ id: uuid.v4(), 
-                            title: this.state.title, 
-                            totalTimeInMinutes: this.state.totalTimeInMinutes });
-      this.setState({ title: "", totalTimeInMinutes: "" });
+                            title: this.titleInput.current.value, 
+                            totalTimeInMinutes: this.totalTimeInMinutesInput.current.value
+                          });
+      this.totalTimeInMinutesInput.current.value = "";
+      this.titleInput.current.value = "";
     }
 
     render() {
       return(
         <form onSubmit={this.handleSubmit} className={`TimeboxCreator`} >
           <label>Co robisz?
-            <input  
-                value={this.state.title}
-                onChange={this.handleTitleChange}
-                type="text" />
+            <input 
+                type="text"
+                ref={this.titleInput} />
+                { 
+                // value={this.state.title}
+                // onChange={this.handleTitleChange}
+                }
           </label><br/>
           <label>Ile minut  
             <input  
                 type="number" 
-                value={this.state.totalTimeInMinutes}
-                onChange={this.handleTotalTimeInMinChange} />
+                ref={this.totalTimeInMinutesInput}
+                />
+                {
+                // value={this.state.totalTimeInMinutes}
+                // onChange={this.handleTotalTimeInMinChange} 
+                }
           </label><br/>
           <button 
           >Dodaj timebox</button>
@@ -300,10 +302,10 @@
   class TimeboxList extends React.Component {
     state = {
       timeboxes: [
-        {title: "costam 1", totalTimeInMinutes: "25"},
-        {title: "costam 2", totalTimeInMinutes: "21"},
-        {title: "costam 3", totalTimeInMinutes: "28"},
-        {title: "costam 4", totalTimeInMinutes: "20"}
+        // {title: "costam 1", totalTimeInMinutes: "25"},
+        // {title: "costam 2", totalTimeInMinutes: "21"},
+        // {title: "costam 3", totalTimeInMinutes: "28"},
+        // {title: "costam 4", totalTimeInMinutes: "20"}
       ]
     }
 
